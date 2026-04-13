@@ -28,14 +28,14 @@ for file in files:
     )
 
     # padronizacao
-    df["CNPJ_FUNDO_CLASSE"] = df["CNPJ_FUNDO_CLASSE"].astype(str).str.replace(r"\D", "", regex=True)
+    df["CNPJ_FUNDO"] = df["CNPJ_FUNDO_CLASSE"].astype(str).str.replace(r"\D", "", regex=True)
     df["DT_COMPTC"] = pd.to_datetime(df["DT_COMPTC"])
 
     df_list.append(df)
 
 #concatenando tudo
 df_concat = pd.concat(df_list, ignore_index=True)
-print("Shape após concat:", df_all.shape)
+print("Shape após concat:", df_concat.shape)
 
 cad_path = os.path.join(RAW_PATH, "cad_fi.csv")
 
@@ -48,3 +48,17 @@ df_cad = pd.read_csv(
 )
 
 df_cad["CNPJ_FUNDO"] = df_cad["CNPJ_FUNDO"].astype(str).str.replace(r"\D", "", regex=True)
+
+# JOIN (merge)
+df = df_concat.merge(df_cad, on="CNPJ_FUNDO", how="left")
+print("Shape após join:", df.shape)
+
+# ordenacao e exportacao em Parquet
+df = df.sort_values(["CNPJ_FUNDO", "DT_COMPTC"])
+
+output_path = os.path.join(PROCESSED_PATH, "funds_raw.parquet")
+df.to_parquet(output_path)
+
+print(f"Arquivo salvo em: {output_path}")
+
+print("Concluído!")
