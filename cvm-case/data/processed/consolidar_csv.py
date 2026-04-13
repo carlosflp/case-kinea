@@ -37,20 +37,20 @@ for file in files:
 df_concat = pd.concat(df_list, ignore_index=True)
 print("Shape após concat:", df_concat.shape)
 
-cad_path = os.path.join(RAW_PATH, "cad_fi.csv")
+reg_path = os.path.join(RAW_PATH, "registro_classe.csv")
 
 #lendo cadastro
-df_cad = pd.read_csv(
-    cad_path,
+df_reg = pd.read_csv(
+    reg_path,
     sep=";",
     encoding="latin-1",
     low_memory=False
 )
 
-df_cad["CNPJ_FUNDO"] = df_cad["CNPJ_FUNDO"].astype(str).str.replace(r"\D", "", regex=True)
+df_reg["CNPJ_FUNDO"] = df_reg["CNPJ_Classe"].astype(str).str.replace(r"\D", "", regex=True)
 
 # JOIN (merge)
-df = df_concat.merge(df_cad, on="CNPJ_FUNDO", how="left")
+df = df_concat.merge(df_reg, on="CNPJ_FUNDO", how="left")
 print("Shape após join:", df.shape)
 
 # ordenacao e exportacao em Parquet
