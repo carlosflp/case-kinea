@@ -36,3 +36,15 @@ for file in files:
 #concatenando tudo
 df_concat = pd.concat(df_list, ignore_index=True)
 print("Shape após concat:", df_all.shape)
+
+cad_path = os.path.join(RAW_PATH, "cad_fi.csv")
+
+#lendo cadastro
+df_cad = pd.read_csv(
+    cad_path,
+    sep=";",
+    encoding="latin-1",
+    low_memory=False
+)
+
+df_cad["CNPJ_FUNDO"] = df_cad["CNPJ_FUNDO"].astype(str).str.replace(r"\D", "", regex=True)
