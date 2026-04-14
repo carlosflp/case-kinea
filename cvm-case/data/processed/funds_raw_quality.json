@@ -14,18 +14,18 @@
     "registry_rows_after_dedup": 35834
   },
   "merge": {
-    "rows_after_merge": 12418272,
-    "funds_after_merge": 32073,
-    "merge_hit_rate": 0.7980147318403076,
-    "rows_without_registry_match": 2508308
+    "rows_after_merge": 12443603,
+    "funds_after_merge": 32080,
+    "merge_hit_rate": 0.7982305446420944,
+    "rows_without_registry_match": 2510739
   },
   "nulls_after_merge": {
     "VL_QUOTA": 0,
     "VL_PATRIM_LIQ": 0,
     "CAPTC_DIA": 0,
     "RESG_DIA": 0,
-    "Classificacao": 2581141,
-    "Situacao": 2508308
+    "Classificacao": 2583589,
+    "Situacao": 2510739
   },
   "cleaning_rules": [
     "Padronização de chave CNPJ removendo pontuação.",

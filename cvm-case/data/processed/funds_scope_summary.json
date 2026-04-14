@@ -3,23 +3,31 @@
     "classificacao": "Ações",
     "situacao": "Em Funcionamento Normal",
     "min_observations_per_fund": 50,
+    "min_valid_business_days": 50,
+    "min_valid_day_ratio": 0.8,
     "target": "Fluxo futuro acumulado de T+1 a T+21 dias úteis, normalizado pelo PL defasado em 1 dia"
   },
   "sample": {
-    "rows_after_scope_filter": 1751278,
-    "rows_model_ready": 1665525,
-    "eligible_entities": 3888,
-    "eligible_class_cnpjs": 3827,
-    "period_start": "2024-05-01",
+    "rows_after_scope_filter": 1740227,
+    "rows_model_ready": 1654531,
+    "eligible_entities": 3887,
+    "eligible_class_cnpjs": 3826,
+    "period_start": "2024-05-02",
     "period_end": "2026-04-10"
+  },
+  "calendar_quality": {
+    "non_business_rows_removed": 14689,
+    "median_valid_day_ratio": 1.0,
+    "p05_valid_day_ratio": 0.9979423868312757,
+    "eligible_entities_after_calendar_filter": 3887
   },
   "target_distribution": {
     "median": 0.0,
-    "mean_clipped_1": -0.004389631890902379,
-    "p01": -0.30495854245164117,
-    "p05": -0.10736489184706716,
-    "p95": 0.07777462681071672,
-    "p99": 0.43598661276771883,
-    "share_abs_target_gt_1": 0.004160249771093199
+    "mean_clipped_1": -0.004462786145894073,
+    "p01": -0.3070664553393157,
+    "p05": -0.10803626357515511,
+    "p95": 0.07830614239270939,
+    "p99": 0.4375722424178456,
+    "share_abs_target_gt_1": 0.004164322094901818
   }
 }
