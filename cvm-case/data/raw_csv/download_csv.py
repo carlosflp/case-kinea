@@ -3,7 +3,6 @@ import requests
 import zipfile
 from io import BytesIO
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 RAW_PATH = os.path.join(BASE_DIR, "data", "raw_csv")
@@ -18,7 +17,10 @@ def gerar_lista_meses(n_months=24):
     months = []
 
     for i in range(n_months):
-        month = today - relativedelta(months=i)
+        month_index = today.year * 12 + today.month - 1 - i
+        year = month_index // 12
+        month = month_index % 12 + 1
+        month = datetime(year, month, 1)
         months.append(month.strftime("%Y%m"))
 
     return sorted(months)
