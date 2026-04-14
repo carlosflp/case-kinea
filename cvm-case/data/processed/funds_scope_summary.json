@@ -1,0 +1,25 @@
+{
+  "scope_definition": {
+    "classificacao": "Ações",
+    "situacao": "Em Funcionamento Normal",
+    "min_observations_per_fund": 50,
+    "target": "Fluxo futuro acumulado de T+1 a T+21 dias úteis, normalizado pelo PL defasado em 1 dia"
+  },
+  "sample": {
+    "rows_after_scope_filter": 1751278,
+    "rows_model_ready": 1665525,
+    "eligible_entities": 3888,
+    "eligible_class_cnpjs": 3827,
+    "period_start": "2024-05-01",
+    "period_end": "2026-04-10"
+  },
+  "target_distribution": {
+    "median": 0.0,
+    "mean_clipped_1": -0.004389631890902379,
+    "p01": -0.30495854245164117,
+    "p05": -0.10736489184706716,
+    "p95": 0.07777462681071672,
+    "p99": 0.43598661276771883,
+    "share_abs_target_gt_1": 0.004160249771093199
+  }
+}
