@@ -10,6 +10,8 @@ RAW_PATH = os.path.join(BASE_DIR, "data", "raw_csv")
 os.makedirs(RAW_PATH, exist_ok=True)
 
 BASE_URL = "https://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS/"
+REGISTRY_URL = "https://dados.cvm.gov.br/dados/FI/CAD/DADOS/registro_fundo_classe.zip"
+REGISTRY_OUTPUT_NAME = "registro_classe.csv"
 
 # gerar lista com n meses
 def gerar_lista_meses(n_months=24):
@@ -54,5 +56,33 @@ def download_arq():
         else:
             print(f"Erro ao baixar {zip_name}")
 
+
+def download_registro_classe():
+    output_path = os.path.join(RAW_PATH, REGISTRY_OUTPUT_NAME)
+
+    if os.path.exists(output_path):
+        print(f"Já existe: {REGISTRY_OUTPUT_NAME}")
+        return
+
+    print("Baixando: registro_fundo_classe.zip")
+    response = requests.get(REGISTRY_URL)
+
+    if response.status_code != 200:
+        print("Erro ao baixar registro_fundo_classe.zip")
+        return
+
+    with zipfile.ZipFile(BytesIO(response.content)) as z:
+        members = [name for name in z.namelist() if name.lower().endswith(".csv")]
+        if not members:
+            print("Nenhum CSV encontrado em registro_fundo_classe.zip")
+            return
+
+        source_name = members[0]
+        with z.open(source_name) as source, open(output_path, "wb") as target:
+            target.write(source.read())
+
+    print(f"Extraído: {REGISTRY_OUTPUT_NAME}")
+
 if __name__ == "__main__":
     download_arq()
+    download_registro_classe()
