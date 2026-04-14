@@ -1,18 +1,26 @@
 import json
 import os
+import sys
 import unicodedata
 
 import pandas as pd
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
 PROCESSED_PATH = os.path.join(BASE_DIR, "data", "processed")
 INPUT_PATH = os.path.join(PROCESSED_PATH, "funds_raw.parquet")
 OUTPUT_PATH = os.path.join(PROCESSED_PATH, "funds_scope.parquet")
 SUMMARY_PATH = os.path.join(PROCESSED_PATH, "funds_scope_summary.json")
 
+from utils.br_calendar import business_days_between, is_business_day
+
 MIN_OBSERVATIONS = 50
 TARGET_WINDOW_DAYS = 21
+MIN_VALID_DAY_RATIO = 0.80
+MIN_VALID_BUSINESS_DAYS = 50
 
 
 def normalize_text(value):
@@ -30,6 +38,19 @@ def normalize_text(value):
 def future_rolling_sum(series, window):
     shifted = series.shift(-1)
     return shifted.rolling(window=window, min_periods=window).sum().shift(-(window - 1))
+
+
+def coverage_summary(group):
+    expected_days = business_days_between(group["DT_COMPTC"].min(), group["DT_COMPTC"].max())
+    expected_count = len(expected_days)
+    observed_count = group["DT_COMPTC"].nunique()
+    return pd.Series(
+        {
+            "observed_business_days": observed_count,
+            "expected_business_days": expected_count,
+            "valid_day_ratio": observed_count / expected_count if expected_count else None,
+        }
+    )
 
 
 def build_scope_dataset():
@@ -59,6 +80,7 @@ def build_scope_dataset():
     df = pd.read_parquet(INPUT_PATH, columns=columns)
     df["DT_COMPTC"] = pd.to_datetime(df["DT_COMPTC"])
     df = df.sort_values(["ENTITY_KEY", "DT_COMPTC"]).copy()
+    df["is_business_day"] = is_business_day(df["DT_COMPTC"])
 
     df["classificacao_norm"] = df["Classificacao"].map(normalize_text)
     df["situacao_norm"] = df["Situacao"].map(normalize_text)
@@ -69,9 +91,18 @@ def build_scope_dataset():
     )
     df = df.loc[scope_mask].copy()
 
-    counts = df.groupby("ENTITY_KEY").size()
-    eligible_entities = counts[counts >= MIN_OBSERVATIONS].index
+    non_business_rows = int((~df["is_business_day"]).sum())
+    if non_business_rows:
+        df = df.loc[df["is_business_day"]].copy()
+
+    entity_coverage = df.groupby("ENTITY_KEY").apply(coverage_summary).reset_index()
+    eligible_entities = entity_coverage.loc[
+        entity_coverage["observed_business_days"].ge(max(MIN_OBSERVATIONS, MIN_VALID_BUSINESS_DAYS))
+        & entity_coverage["valid_day_ratio"].ge(MIN_VALID_DAY_RATIO),
+        "ENTITY_KEY",
+    ]
     df = df[df["ENTITY_KEY"].isin(eligible_entities)].copy()
+    df = df.merge(entity_coverage, on="ENTITY_KEY", how="left")
 
     df["flow_dia"] = df["CAPTC_DIA"].fillna(0) - df["RESG_DIA"].fillna(0)
     df["pl_lag1"] = df.groupby("ENTITY_KEY")["VL_PATRIM_LIQ"].shift(1)
@@ -100,6 +131,8 @@ def build_scope_dataset():
             "classificacao": "Ações",
             "situacao": "Em Funcionamento Normal",
             "min_observations_per_fund": MIN_OBSERVATIONS,
+            "min_valid_business_days": MIN_VALID_BUSINESS_DAYS,
+            "min_valid_day_ratio": MIN_VALID_DAY_RATIO,
             "target": "Fluxo futuro acumulado de T+1 a T+21 dias úteis, normalizado pelo PL defasado em 1 dia",
         },
         "sample": {
@@ -109,6 +142,12 @@ def build_scope_dataset():
             "eligible_class_cnpjs": int(df["CNPJ_FUNDO"].nunique()),
             "period_start": str(df["DT_COMPTC"].min().date()),
             "period_end": str(df["DT_COMPTC"].max().date()),
+        },
+        "calendar_quality": {
+            "non_business_rows_removed": non_business_rows,
+            "median_valid_day_ratio": float(entity_coverage["valid_day_ratio"].median()),
+            "p05_valid_day_ratio": float(entity_coverage["valid_day_ratio"].quantile(0.05)),
+            "eligible_entities_after_calendar_filter": int(df["ENTITY_KEY"].nunique()),
         },
         "target_distribution": {
             "median": float(model_base["target_flow_pct_t1_t21"].median()),
