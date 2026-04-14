@@ -32,6 +32,18 @@ python -m pip install -r requirements.txt
 Na raiz do projeto:
 
 ```bash
+python run_pipeline.py
+```
+
+Se quiser pular o download e usar os arquivos já existentes:
+
+```bash
+python run_pipeline.py --skip-download
+```
+
+Execução manual por etapas:
+
+```bash
 python cvm-case/data/raw_csv/download_csv.py
 python cvm-case/data/processed/consolidar_csv.py
 python cvm-case/data/processed/build_scope_dataset.py
@@ -113,4 +125,3 @@ Principais drivers no holdout:
 - `publico_alvo_bucket`
 - `nr_cotst_change_21d`
 - `valid_day_ratio`
-
