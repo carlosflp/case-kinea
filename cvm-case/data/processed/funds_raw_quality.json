@@ -1,0 +1,39 @@
+{
+  "source_requirements": {
+    "daily_informe_used": true,
+    "registry_used": true
+  },
+  "daily_data": {
+    "duplicate_rows_before_cleaning": 78963,
+    "duplicate_keys_before_cleaning": 39479,
+    "conflicting_duplicate_keys": 8660
+  },
+  "registry_data": {
+    "registry_rows_before_dedup": 35845,
+    "registry_duplicate_keys_before_cleaning": 11,
+    "registry_rows_after_dedup": 35834
+  },
+  "merge": {
+    "rows_after_merge": 12418272,
+    "funds_after_merge": 32073,
+    "merge_hit_rate": 0.7980147318403076,
+    "rows_without_registry_match": 2508308
+  },
+  "nulls_after_merge": {
+    "VL_QUOTA": 0,
+    "VL_PATRIM_LIQ": 0,
+    "CAPTC_DIA": 0,
+    "RESG_DIA": 0,
+    "Classificacao": 2581141,
+    "Situacao": 2508308
+  },
+  "cleaning_rules": [
+    "Padronização de chave CNPJ removendo pontuação.",
+    "Conversão de datas com tratamento de erro para NaT.",
+    "Criação de chave da entidade por classe/subclasse usando CNPJ_FUNDO e ID_SUBCLASSE.",
+    "Deduplicação do informe diário mantendo uma linha por ENTITY_KEY e DT_COMPTC.",
+    "Em duplicidades da mesma entidade, preferência para TP_FUNDO_CLASSE = CLASSES - FIF.",
+    "Validação de conflitos em duplicidades usando colunas econômicas do informe diário.",
+    "Deduplicação do cadastro por CNPJ escolhendo o registro com mais campos preenchidos e data de registro mais recente."
+  ]
+}

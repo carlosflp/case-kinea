@@ -1,0 +1,188 @@
+[
+  {
+    "entity_key": "10141924000161::SEM_SUBCLASSE",
+    "cnpj_fundo": "10141924000161",
+    "id_subclasse": null,
+    "denominacao_social": "HS FUNDO DE INVESTIMENTO FINANCEIRO - AÇÕES RESPONSABILIDADE LIMITADA",
+    "dt_comptc": "2024-05-03",
+    "raw_file": "inf_diario_fi_202405.csv",
+    "raw_match_count": 1,
+    "comparison": {
+      "CAPTC_DIA": {
+        "raw": 0.0,
+        "processed": 0.0,
+        "match": true
+      },
+      "RESG_DIA": {
+        "raw": 0.0,
+        "processed": 0.0,
+        "match": true
+      },
+      "VL_PATRIM_LIQ": {
+        "raw": 1068141033.85,
+        "processed": 1068141033.85,
+        "match": true
+      },
+      "VL_QUOTA": {
+        "raw": 2.6878916,
+        "processed": 2.6878916,
+        "match": true
+      }
+    }
+  },
+  {
+    "entity_key": "10141924000161::SEM_SUBCLASSE",
+    "cnpj_fundo": "10141924000161",
+    "id_subclasse": null,
+    "denominacao_social": "HS FUNDO DE INVESTIMENTO FINANCEIRO - AÇÕES RESPONSABILIDADE LIMITADA",
+    "dt_comptc": "2024-05-06",
+    "raw_file": "inf_diario_fi_202405.csv",
+    "raw_match_count": 1,
+    "comparison": {
+      "CAPTC_DIA": {
+        "raw": 0.0,
+        "processed": 0.0,
+        "match": true
+      },
+      "RESG_DIA": {
+        "raw": 0.0,
+        "processed": 0.0,
+        "match": true
+      },
+      "VL_PATRIM_LIQ": {
+        "raw": 1064199154.61,
+        "processed": 1064199154.61,
+        "match": true
+      },
+      "VL_QUOTA": {
+        "raw": 2.6779722,
+        "processed": 2.6779722,
+        "match": true
+      }
+    }
+  },
+  {
+    "entity_key": "10141924000161::SEM_SUBCLASSE",
+    "cnpj_fundo": "10141924000161",
+    "id_subclasse": null,
+    "denominacao_social": "HS FUNDO DE INVESTIMENTO FINANCEIRO - AÇÕES RESPONSABILIDADE LIMITADA",
+    "dt_comptc": "2024-05-07",
+    "raw_file": "inf_diario_fi_202405.csv",
+    "raw_match_count": 1,
+    "comparison": {
+      "CAPTC_DIA": {
+        "raw": 0.0,
+        "processed": 0.0,
+        "match": true
+      },
+      "RESG_DIA": {
+        "raw": 0.0,
+        "processed": 0.0,
+        "match": true
+      },
+      "VL_PATRIM_LIQ": {
+        "raw": 1065386661.89,
+        "processed": 1065386661.89,
+        "match": true
+      },
+      "VL_QUOTA": {
+        "raw": 2.6809605,
+        "processed": 2.6809605,
+        "match": true
+      }
+    }
+  },
+  {
+    "entity_key": "10199934000158::SEM_SUBCLASSE",
+    "cnpj_fundo": "10199934000158",
+    "id_subclasse": null,
+    "denominacao_social": "BANRISUL DIVIDENDOS FUNDO DE INVESTIMENTO FINANCEIRO EM AÇÕES RESPONSABILIDADE LIMITADA",
+    "dt_comptc": "2024-05-03",
+    "raw_file": "inf_diario_fi_202405.csv",
+    "raw_match_count": 1,
+    "comparison": {
+      "CAPTC_DIA": {
+        "raw": 17815.98,
+        "processed": 17815.98,
+        "match": true
+      },
+      "RESG_DIA": {
+        "raw": 7571.73,
+        "processed": 7571.73,
+        "match": true
+      },
+      "VL_PATRIM_LIQ": {
+        "raw": 19143694.83,
+        "processed": 19143694.83,
+        "match": true
+      },
+      "VL_QUOTA": {
+        "raw": 3.27372,
+        "processed": 3.27372,
+        "match": true
+      }
+    }
+  },
+  {
+    "entity_key": "10199934000158::SEM_SUBCLASSE",
+    "cnpj_fundo": "10199934000158",
+    "id_subclasse": null,
+    "denominacao_social": "BANRISUL DIVIDENDOS FUNDO DE INVESTIMENTO FINANCEIRO EM AÇÕES RESPONSABILIDADE LIMITADA",
+    "dt_comptc": "2024-05-06",
+    "raw_file": "inf_diario_fi_202405.csv",
+    "raw_match_count": 1,
+    "comparison": {
+      "CAPTC_DIA": {
+        "raw": 100.0,
+        "processed": 100.0,
+        "match": true
+      },
+      "RESG_DIA": {
+        "raw": 2140.26,
+        "processed": 2140.26,
+        "match": true
+      },
+      "VL_PATRIM_LIQ": {
+        "raw": 19120653.74,
+        "processed": 19120653.74,
+        "match": true
+      },
+      "VL_QUOTA": {
+        "raw": 3.27013,
+        "processed": 3.27013,
+        "match": true
+      }
+    }
+  },
+  {
+    "entity_key": "10199934000158::SEM_SUBCLASSE",
+    "cnpj_fundo": "10199934000158",
+    "id_subclasse": null,
+    "denominacao_social": "BANRISUL DIVIDENDOS FUNDO DE INVESTIMENTO FINANCEIRO EM AÇÕES RESPONSABILIDADE LIMITADA",
+    "dt_comptc": "2024-05-07",
+    "raw_file": "inf_diario_fi_202405.csv",
+    "raw_match_count": 1,
+    "comparison": {
+      "CAPTC_DIA": {
+        "raw": 200.0,
+        "processed": 200.0,
+        "match": true
+      },
+      "RESG_DIA": {
+        "raw": 7136.17,
+        "processed": 7136.17,
+        "match": true
+      },
+      "VL_PATRIM_LIQ": {
+        "raw": 19133164.5,
+        "processed": 19133164.5,
+        "match": true
+      },
+      "VL_QUOTA": {
+        "raw": 3.27345,
+        "processed": 3.27345,
+        "match": true
+      }
+    }
+  }
+]
