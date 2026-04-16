@@ -125,3 +125,8 @@ Principais drivers no holdout:
 - `publico_alvo_bucket`
 - `nr_cotst_change_21d`
 - `valid_day_ratio`
+
+## Próximos passos
+
+Como evolução natural do baseline atual, um caminho promissor seria testar uma modelagem em dois estágios para lidar melhor com a natureza do target, que é fortemente concentrado em zero e apresenta caudas relevantes. Nesse desenho, o primeiro estágio estimaria a probabilidade de ocorrência de um evento relevante de fluxo, enquanto o segundo estágio modelaria a magnitude condicional desse fluxo. Essa abordagem pode ser mais aderente ao problema do que uma regressão única, especialmente para capturar melhor os casos de captação ou resgate mais intensos, mantendo uma avaliação temporal consistente em comparação com o baseline atual.
+
